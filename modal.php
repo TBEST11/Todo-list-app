@@ -13,6 +13,9 @@
         <div class="modal-body">
           <div class="modal-body" px-4>
             <form action="" method="post" id="show-form-data">
+            <div class="form-group">
+                <label id="viewuser_id"></label>
+              </div>
               <div class="form-group">
                 <label id="viewActivity"></label>
               </div>
@@ -57,6 +60,9 @@
         <div class="modal-body" px-4>
           <form action="editTodo.php" method="post" id="Edit-form-data">
             <input type="hidden" name="id" id="id" class="form-control" required>
+            <div class="form-group">
+              <input type="text" name="user_id" class="form-control" id="edituser_id" required>
+            </div>
             <div class="form-group">
               <input type="text" name="activity" class="form-control" id="editActivity" required>
             </div>
@@ -115,7 +121,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
     </div>
   </div>

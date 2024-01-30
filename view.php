@@ -5,7 +5,7 @@ require('db.php');
 include("create.php");
 
 
-$sql = "SELECT id, activity, status, start_date, end_date, description FROM todo ORDER BY id DESC";
+$sql = "SELECT id, user_id, activity, status, start_date, end_date, description FROM todo ORDER BY id DESC";
 $result = $conn->query($sql);
 
 
@@ -61,6 +61,7 @@ $result = $conn->query($sql);
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">S/N</th>
+						<th scope="col">User ID</th>
 						<th scope="col">Activity</th>
 						<th scope="col">Status</th>
 						<th scope="col">Start Date</th>
@@ -91,6 +92,7 @@ $result = $conn->query($sql);
 
 						echo '<tr>'
 							. '<td>' . $i++ . '</td>'
+							. '<td>' . $row->user_id . '</td>'
 							. '<td>' . $row->activity . '</td>'
 							. '<td>' . $view . '</td>'
 							. '<td>' . $row->start_date . '</td>'
@@ -98,8 +100,8 @@ $result = $conn->query($sql);
 							. '<td>' . $row->description . '</td>'
 							. '<td>'
 
-							. '<a href="#" title="View Details" class="text-success infobtn" data-toggle="modal" data-target="#viewTodoModal"  data-todo-id="' . $row->id . ' " data-activity="' . $row->activity . '" data-start-date="' . $row->start_date. '" data-end-date="' . $row->end_date . '" data-description="' . $row->description . '" data-status="' . $row->status . '"><i class="fas fa-info-circle fa-lg">&nbsp;&nbsp;</i></a>'
-							. '<a href="#" title="Edit" class="text-primary editbtn" data-toggle="modal" data-target="#editTodoModal" data-todo-id="' . $row->id . ' " data-activity="' . $row->activity . '" data-start-date="' . $row->start_date. '" data-end-date="' . $row->end_date . '" data-description="' . $row->description . '" data-status="' . $row->status . '"><i class="fas fa-edit fa-lg">&nbsp;&nbsp;</i></a>'
+							. '<a href="#" title="View Details" class="text-success infobtn" data-toggle="modal" data-target="#viewTodoModal"  data-todo-id="' . $row->id . ' " data-user-id="' . $row->user_id . ' " data-activity="' . $row->activity . '" data-start-date="' . $row->start_date. '" data-end-date="' . $row->end_date . '" data-description="' . $row->description . '" data-status="' . $row->status . '"><i class="fas fa-info-circle fa-lg">&nbsp;&nbsp;</i></a>'
+							. '<a href="#" title="Edit" class="text-primary editbtn" data-toggle="modal" data-target="#editTodoModal" data-todo-id="' . $row->id . '" data-user-id="' . $row->user_id . ' " data-activity="' . $row->activity . '" data-start-date="' . $row->start_date. '" data-end-date="' . $row->end_date . '" data-description="' . $row->description . '" data-status="' . $row->status . '"><i class="fas fa-edit fa-lg">&nbsp;&nbsp;</i></a>'
 							. '<a href="#" title="Delete" class="text-danger delbtn" data-toggle="modal" data-target="#deleteTodoModal" data-todo-id=" ' . $row->id . '"><i class="fas fa-trash-alt fa-lg">&nbsp;&nbsp;</i></a>'
 							. '</td>'
 							. '</tr>';
@@ -135,6 +137,7 @@ $result = $conn->query($sql);
 			$("body").on("click", (".infobtn"), function() {
 			$("#viewTodoModal").modal('show');
 				   $("#id").text($(this).data('todo-id'));
+				   $("#viewuser_id").text(`User ID:   ${$(this).data('user-id')}`);
 				   $("#viewActivity").text(`Activity:   ${$(this).data('activity')}`);
 				   $("#viewStatus").text(`Status:    ${$(this).data('status')}`);
 				   $("#viewStart_date").text(`Start Date:   ${$(this).data('start-date')}`);;
@@ -180,6 +183,7 @@ $result = $conn->query($sql);
 				
 				$("#editTodoModal").modal('show');
 				$("#id").val($(this).data('todo-id'));
+				$("#edituser_id").val($(this).data('user-id'));
 				$("#editActivity").val($(this).data('activity'));
 				$("#editStatus").val($(this).data('status'));
 				$("#editStart_date").val($(this).data('start-date'));

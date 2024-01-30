@@ -13,15 +13,15 @@ if (isset($_POST["deleteTodoBtn"])) {
 function editTodoItem($conn, $data)
 {
     $id = $data['id'];
-
+    $user_id = $data['user_id'];
     $activity = $data['activity'];
     $status = $data['status'];
     $start_date = $data['start_date'];
     $end_date = $data['end_date'];
     $description = $data['description'];
 
-    if (!empty($activity) || !empty($status) || !empty($start_date) || !empty($end_date) || !empty($description)) {
-        $sql = "UPDATE `todo` SET `activity`='$activity', `status`='$status', `start_date`='$start_date', `end_date`='$end_date', `description`='$description' WHERE `id`='$id'";
+    if (!empty($user_id) ||!empty($activity) || !empty($status) || !empty($start_date) || !empty($end_date) || !empty($description)) {
+        $sql = "UPDATE `todo` SET `user_id`='$user_id', `activity`='$activity', `status`='$status', `start_date`='$start_date', `end_date`='$end_date', `description`='$description' WHERE `id`='$id'";
         $query = mysqli_query($conn, $sql);
         if ($query) {
             header("Location: view.php");

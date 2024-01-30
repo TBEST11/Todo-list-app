@@ -6,12 +6,18 @@ require  "./db.php";
 
       /* validation */
     // $task = $_POST['task'];
+    $user_id = $_POST['user_id'];
     $activity = $_POST['activity'];
     $status = $_POST['status'];
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $description = $_POST['description'];
 
+    $data['taskMsg'] = '';
+    if(empty($user_id)) {
+
+      $data['taskMsg'] = "Empty Field!";
+    }
     $data['taskMsg'] = '';
     if(empty($activity)) {
 
@@ -46,7 +52,7 @@ require  "./db.php";
      if($validation) {
 
      /* insert query*/
-     $sql = "INSERT INTO `todo` (`activity`, `status`, `start_date`, `end_date`, `description`) VALUES ('$activity', '$status', '$start_date', '$end_date', '$description')";
+     $sql = "INSERT INTO `todo` (`user_id`,`activity`, `status`, `start_date`, `end_date`, `description`) VALUES ('$user_id','$activity', '$status', '$start_date', '$end_date', '$description')";
      
     // $result = $conn->query($query);
      
